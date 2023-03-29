@@ -21,3 +21,6 @@ poly = PolynomialFeatures(degree=3, include_bias=False)
 poly.fit(fp)
 train_poly = poly.transform(fp)
 print(np.shape(train_poly))
+
+train_input, test_input, train_target, test_target = train_test_split(
+    train_poly, ep, test_size=0.50,random_state=42)
