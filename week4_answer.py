@@ -12,6 +12,11 @@ plt.plot(fp[:,0])
 plt.plot(fp[:,1])
 plt.plot(fp[:,2])
 plt.plot(ep*10000)
-plt.show()
+#plt.show()
 
-#fp = fp[:,0:3]
+fp = fp[:,0:3]
+
+poly = PolynomialFeatures(degree=3, include_bias=False)
+poly.fit(fp)
+train_poly = poly.transform(fp)
+print(np.shape(train_poly))
