@@ -14,6 +14,7 @@ plt.plot(fp[:,2])
 plt.plot(ep*10000)
 #plt.show()
 
+
 fp = fp[:,0:3]
 
 poly = PolynomialFeatures(degree=3, include_bias=False)
