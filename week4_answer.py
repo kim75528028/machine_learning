@@ -16,12 +16,12 @@ plt.plot(ep*10000)
 #plt.show()
 
 
-fp = fp[:,0:3]
+fp = fp[:,2:3] # 1:원자력 2:휘발유 3:가스
 
 poly = PolynomialFeatures(degree=3, include_bias=False)
 poly.fit(fp)
 train_poly = poly.transform(fp)
-print(np.shape(train_poly))
+#print(np.shape(train_poly))
 
 tr_in, ts_in, tr_out, ts_out = train_test_split(
     train_poly, ep, test_size=0.50,random_state=42)
