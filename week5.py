@@ -23,6 +23,30 @@ test_scaled = ss.transform(test_input)
 lr = LogisticRegression()
 lr.fit(train_scaled, train_target)
 
-print(lr.score(train_scaled, train_target))
-print(lr.score(test_scaled, test_target))
-print(lr.coef_, lr.intercept_)
+#print(lr.score(train_scaled, train_target))
+#print(lr.score(test_scaled, test_target))
+#print(lr.coef_, lr.intercept_)
+
+from sklearn.tree import DecisionTreeClassifier
+
+dt = DecisionTreeClassifier()
+dt.fit(train_scaled, train_target)
+
+#print(dt.score(train_scaled, train_target))
+#print(dt.score(test_scaled, test_target))
+
+from sklearn.tree import plot_tree
+
+#plt.figure(figsize=(10,7))
+#plot_tree(dt)
+#plt.show()
+
+dt = DecisionTreeClassifier(max_depth=3, random_state=42)
+dt.fit(train_input, train_target)
+print(dt.score(train_input, train_target))
+print(dt.score(test_input,test_target))
+plt.figure(figsize=(20,15))
+plot_tree(dt, filled=True, feature_names=['alcohol', 'suger', 'pH'])
+plt.show()
+
+print(dt.feature_importances_)
