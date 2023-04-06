@@ -7,7 +7,7 @@ fruits = np.load('fruits_300.npy')
 apple = fruits[0:100].reshape(-1, 100*100)
 pineapple = fruits[100:200].reshape(-1, 100*100)
 banana = fruits[200:300].reshape(-1, 100*100)
-'''
+
 # print(apple.shape)
 
 #plt.hist(np.mean(apple, axis=1), alpha=0.8)
@@ -44,7 +44,8 @@ for i in range(10):
 
         axs[i,j].axis('off')
 #plt.show()
-'''
+
+#클러스터
 from sklearn.cluster import KMeans
 fruits_2d = fruits.reshape(-1, 100*100)
 
@@ -54,3 +55,28 @@ km.fit(fruits_2d)
 print(km.labels_)
 
 print(np.unique(km.labels_, return_counts=True))
+def draw_fruits(arr, ratio=1):
+    n = len(arr)
+    rows = int(np.ceil(n/10))
+    cols = n if rows < 2 else 10
+    fig, axs = plt.subplots(rows, cols, figsize=(col*ratio, row*ratio),squeeze=False)
+    for i in range(rows):
+        for j in range(cols):
+            if i*10 + j < n:
+                axs[i,j].imshow(arr[i*10 + j], camp='gray_r')
+                axs[i,j].axis(off)
+
+fruits_2d = fruits.reshape(-1, 100*100)
+from sklearn.decomposition import PCA
+
+pca = PCA(n_components=50)
+pca.fit(fruits_2d)
+
+print(pca.components_.shape)
+
+draw_fruits(pca.components_.reshape(-1,100,100))
+
+print(fruits_2d.shape)
+
+fruits_pca = pca.transform(fruits_2d)
+print(fruits_pca.shape)
